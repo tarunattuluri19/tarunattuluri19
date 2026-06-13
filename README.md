@@ -3,320 +3,760 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Tarun A — AI Full Stack Java Developer at Cognizant. Building intelligent web experiences with Java, Spring, React and Node.js." />
-  <meta name="author" content="Tarun A" />
-
-  <!-- Open Graph / social preview -->
-  <meta property="og:title" content="Tarun A — AI Full Stack Java Developer" />
-  <meta property="og:description" content="AI Full Stack Java Developer at Cognizant. Java • Spring • React • Node.js" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://tarunattuluri19.github.io/" />
-
-  <title>Tarun A — AI Full Stack Java Developer</title>
-
+  <title>Tarun Attuluri — Java Full Stack Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💻</text></svg>" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── TOKENS ─────────────────────────────────────────────── */
+    :root {
+      --bg:        #0B0F1A;
+      --surface:   #111827;
+      --border:    #1E2A3A;
+      --accent:    #00D4FF;
+      --accent2:   #7C3AED;
+      --text:      #E8EDF5;
+      --muted:     #7A8AA0;
+      --tag-bg:    #152030;
+      --tag-text:  #5BB8D4;
+      --mono:      'JetBrains Mono', monospace;
+      --sans:      'Space Grotesk', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── SCANLINE OVERLAY ───────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.04) 2px,
+        rgba(0,0,0,0.04) 4px
+      );
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* ─── NAV ────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2.5rem;
+      background: rgba(11, 15, 26, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ─── HERO ───────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 2.5rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* The signature element: a live terminal-style prompt */
+    .terminal-prompt {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .terminal-prompt::before {
+      content: '▶';
+      animation: blink 1.2s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.4rem;
+    }
+
+    .name-accent {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-role {
+      font-family: var(--mono);
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-desc {
+      max-width: 580px;
+      font-size: 1.05rem;
+      color: #B0BDCe;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      background: #33DEFF;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 212, 255, 0.25);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* ─── STATS BAR ──────────────────────────────────────────── */
+    .stats-bar {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-item { }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 0.25rem;
+    }
+
+    /* ─── SECTION WRAPPER ────────────────────────────────────── */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2.5rem;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 3rem;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ─── SKILLS GRID ────────────────────────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .skill-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .skill-category {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.75rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── EXPERIENCE ─────────────────────────────────────────── */
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .exp-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+      position: relative;
+      transition: border-color 0.2s;
+    }
+
+    .exp-card:hover { border-color: rgba(0, 212, 255, 0.4); }
+
+    .exp-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      border-radius: 10px 0 0 10px;
+      background: linear-gradient(180deg, var(--accent), var(--accent2));
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-role {
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+
+    .exp-period {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      background: var(--tag-bg);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    .exp-company {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+
+    .exp-highlights {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .exp-highlights li {
+      font-size: 0.92rem;
+      color: #B0BDCe;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .exp-highlights li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .exp-metrics {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .metric {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .metric-val {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .metric-desc {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ─── PROJECTS ───────────────────────────────────────────── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .project-card:hover {
+      border-color: rgba(124, 58, 237, 0.5);
+      transform: translateY(-4px);
+    }
+
+    .project-icon {
+      font-size: 1.6rem;
+    }
+
+    .project-name {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .project-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: auto;
+    }
+
+    /* ─── CERTIFICATIONS ─────────────────────────────────────── */
+    .certs-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .cert-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      transition: border-color 0.2s;
+    }
+
+    .cert-card:hover { border-color: var(--accent); }
+
+    .cert-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .cert-badge-aws  { background: rgba(255,153,0,0.12); }
+    .cert-badge-azure{ background: rgba(0,120,212,0.12); }
+    .cert-badge-ant  { background: rgba(0,212,255,0.12); }
+
+    .cert-info { }
+
+    .cert-name {
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .cert-issuer {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+
+    /* ─── CONTACT ────────────────────────────────────────────── */
+    .contact-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 3rem;
+      text-align: center;
+    }
+
+    .contact-headline {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+
+    .contact-sub {
+      color: var(--muted);
+      margin-bottom: 2rem;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ─── SCROLL REVEAL ──────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { gap: 1rem; }
+      .hero { padding: 7rem 1.25rem 3rem; }
+      .section { padding: 3.5rem 1.25rem; }
+      .stats-bar { gap: 2rem; }
+      .exp-metrics { gap: 1rem; }
+      .contact-wrap { padding: 2rem 1.25rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Animated background blobs -->
-  <div class="bg-blobs" aria-hidden="true">
-    <span class="blob blob-1"></span>
-    <span class="blob blob-2"></span>
-    <span class="blob blob-3"></span>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">tarun.attuluri</span>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Work</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="terminal-prompt">tarun@dev ~ java-fullstack-engineer</div>
+  <h1>
+    Tarun<br/>
+    <span class="name-accent">Attuluri</span>
+  </h1>
+  <p class="hero-role">// Java Full Stack Engineer · 3.5 yrs · Bengaluru</p>
+  <p class="hero-desc">
+    Building scalable microservices and high-performance web applications with Java 17, Spring Boot, ReactJS, Kafka, and AWS. Currently at Cognizant working with Société Générale and Oxford University Press.
+  </p>
+  <div class="hero-actions">
+    <a href="mailto:tarunattuluri19@gmail.com" class="btn btn-primary">✉ Get in Touch</a>
+    <a href="https://linkedin.com" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+    <a href="https://github.com" target="_blank" class="btn btn-outline">GitHub ↗</a>
   </div>
 
-  <!-- ============ NAVBAR ============ -->
-  <header class="navbar" id="navbar">
-    <nav class="nav container">
-      <a href="#home" class="nav__logo">
-        <span class="logo-mark">&lt;/&gt;</span> Tarun&nbsp;A
-      </a>
-
-      <ul class="nav__menu" id="nav-menu">
-        <li><a href="#home" class="nav__link active">Home</a></li>
-        <li><a href="#about" class="nav__link">About</a></li>
-        <li><a href="#skills" class="nav__link">Skills</a></li>
-        <li><a href="#projects" class="nav__link">Projects</a></li>
-        <li><a href="#contact" class="nav__link">Contact</a></li>
-      </ul>
-
-      <div class="nav__actions">
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark / light theme">
-          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20"><path d="M12 17a5 5 0 100-10 5 5 0 000 10zm0 2a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zm0-18a1 1 0 011 1v1a1 1 0 11-2 0V2a1 1 0 011-1zm10 11a1 1 0 010 2h-1a1 1 0 110-2h1zM3 12a1 1 0 010 2H2a1 1 0 110-2h1zm15.07-7.07a1 1 0 011.41 1.41l-.7.71a1 1 0 11-1.42-1.42l.71-.7zM5.64 17.66a1 1 0 011.41 1.41l-.7.71a1 1 0 11-1.42-1.42l.71-.7zm12.73 0l.7.71a1 1 0 01-1.41 1.41l-.71-.7a1 1 0 011.42-1.42zM6.34 4.93l.71.7A1 1 0 015.64 7.05l-.7-.71a1 1 0 011.41-1.41z" fill="currentColor"/></svg>
-          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"/></svg>
-        </button>
-
-        <button class="nav__toggle" id="nav-toggle" aria-label="Open menu">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <!-- ============ HERO ============ -->
-    <section class="hero section" id="home">
-      <div class="container hero__grid">
-        <div class="hero__content">
-          <p class="hero__greet">👋 Hi there, I'm</p>
-          <h1 class="hero__title">Tarun&nbsp;A</h1>
-          <h2 class="hero__subtitle">
-            A passionate <span class="typed" id="typed"></span>
-          </h2>
-          <p class="hero__text">
-            I build intelligent, end‑to‑end web applications — blending solid Java &amp;
-            Spring backends with modern React front‑ends, and exploring how AI can
-            supercharge the way we ship software.
-          </p>
-
-          <div class="hero__cta">
-            <a href="#projects" class="btn btn--primary">
-              View My Work
-              <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h14m-6-6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-            <a href="#contact" class="btn btn--ghost">Get in Touch</a>
-          </div>
-
-          <div class="hero__socials">
-            <a href="https://github.com/tarunattuluri19" target="_blank" rel="noreferrer" aria-label="GitHub" class="social-link">
-              <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49l-.01-1.7c-2.78.62-3.37-1.21-3.37-1.21-.46-1.18-1.11-1.49-1.11-1.49-.9-.64.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.36 9.36 0 015 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.6.69.49A10.02 10.02 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg>
-            </a>
-            <a href="https://tarunattuluri.netlify.app/" target="_blank" rel="noreferrer" aria-label="Blog / Portfolio" class="social-link">
-              <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zM8 17H6v-2h2v2zm0-4H6v-2h2v2zm0-4H6V7h2v2zm10 8h-8v-2h8v2zm0-4h-8v-2h8v2zm0-4h-8V7h8v2z"/></svg>
-            </a>
-            <a href="mailto:tarun@example.com" aria-label="Email" class="social-link">
-              <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="hero__visual">
-          <div class="code-card">
-            <div class="code-card__bar">
-              <span class="dot dot--red"></span>
-              <span class="dot dot--yellow"></span>
-              <span class="dot dot--green"></span>
-              <span class="code-card__file">Developer.java</span>
-            </div>
-<pre class="code-card__body"><code><span class="c-key">public class</span> <span class="c-cls">Developer</span> {
-  <span class="c-key">String</span> name = <span class="c-str">"Tarun A"</span>;
-  <span class="c-key">String</span> role = <span class="c-str">"AI Full Stack"</span>;
-  <span class="c-key">String</span> company = <span class="c-str">"Cognizant"</span>;
-
-  <span class="c-key">String[]</span> stack = {
-    <span class="c-str">"Java"</span>, <span class="c-str">"Spring"</span>, <span class="c-str">"React"</span>,
-    <span class="c-str">"Node.js"</span>, <span class="c-str">"Express"</span>
-  };
-
-  <span class="c-key">boolean</span> learning = <span class="c-num">true</span>; <span class="c-cmt">// AI 🚀</span>
-}</code></pre>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ ABOUT ============ -->
-    <section class="section" id="about">
-      <div class="container">
-        <p class="section__eyebrow">Get to know me</p>
-        <h2 class="section__title">About&nbsp;Me</h2>
-
-        <div class="about__grid">
-          <div class="about__text">
-            <p>
-              I'm a passionate <strong>AI Full Stack Java Developer</strong> who loves turning
-              ideas into reliable, scalable products. My day‑to‑day blends clean backend
-              architecture with delightful, responsive user interfaces.
-            </p>
-            <ul class="about__list">
-              <li>🔭 I'm currently working at <strong>Cognizant</strong></li>
-              <li>🌱 I'm currently learning <strong>AI‑led development</strong></li>
-              <li>📝 I regularly write articles on
-                <a href="https://tarunattuluri.netlify.app/" target="_blank" rel="noreferrer">tarunattuluri.netlify.app</a>
-              </li>
-              <li>💬 Ask me about <strong>Java, Spring, React &amp; full‑stack design</strong></li>
-            </ul>
-            <a href="https://tarunattuluri.netlify.app/" target="_blank" rel="noreferrer" class="btn btn--primary">Read My Blog</a>
-          </div>
-
-          <div class="about__cards">
-            <div class="stat-card">
-              <span class="stat-card__num">Full&nbsp;Stack</span>
-              <span class="stat-card__label">End‑to‑end development</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-card__num">AI&nbsp;+&nbsp;Web</span>
-              <span class="stat-card__label">Smart applications</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-card__num">Java&nbsp;☕</span>
-              <span class="stat-card__label">Spring ecosystem</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-card__num">Writer&nbsp;✍️</span>
-              <span class="stat-card__label">Tech articles &amp; notes</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ SKILLS ============ -->
-    <section class="section section--alt" id="skills">
-      <div class="container">
-        <p class="section__eyebrow">My toolbox</p>
-        <h2 class="section__title">Languages &amp; Tools</h2>
-
-        <div class="skills__grid">
-          <a class="skill" href="https://www.java.com" target="_blank" rel="noreferrer">
-            <img src="https://skillicons.dev/icons?i=java" alt="Java" loading="lazy" />
-            <span>Java</span>
-          </a>
-          <a class="skill" href="https://spring.io" target="_blank" rel="noreferrer">
-            <img src="https://skillicons.dev/icons?i=spring" alt="Spring" loading="lazy" />
-            <span>Spring</span>
-          </a>
-          <a class="skill" href="https://react.dev" target="_blank" rel="noreferrer">
-            <img src="https://skillicons.dev/icons?i=react" alt="React" loading="lazy" />
-            <span>React</span>
-          </a>
-          <a class="skill" href="https://nodejs.org" target="_blank" rel="noreferrer">
-            <img src="https://skillicons.dev/icons?i=nodejs" alt="Node.js" loading="lazy" />
-            <span>Node.js</span>
-          </a>
-          <a class="skill" href="https://expressjs.com" target="_blank" rel="noreferrer">
-            <img src="https://skillicons.dev/icons?i=express" alt="Express" loading="lazy" />
-            <span>Express</span>
-          </a>
-          <a class="skill" href="https://developer.mozilla.org/docs/Web/JavaScript" target="_blank" rel="noreferrer">
-            <img src="https://skillicons.dev/icons?i=js" alt="JavaScript" loading="lazy" />
-            <span>JavaScript</span>
-          </a>
-          <a class="skill" href="https://developer.mozilla.org/docs/Web/HTML" target="_blank" rel="noreferrer">
-            <img src="https://skillicons.dev/icons?i=html" alt="HTML5" loading="lazy" />
-            <span>HTML5</span>
-          </a>
-          <a class="skill" href="https://developer.mozilla.org/docs/Web/CSS" target="_blank" rel="noreferrer">
-            <img src="https://skillicons.dev/icons?i=css" alt="CSS3" loading="lazy" />
-            <span>CSS3</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ PROJECTS ============ -->
-    <section class="section" id="projects">
-      <div class="container">
-        <p class="section__eyebrow">Things I've built</p>
-        <h2 class="section__title">Featured Projects</h2>
-        <p class="section__lead">
-          A few highlights — swap these out with your real repositories any time.
-        </p>
-
-        <div class="projects__grid">
-          <article class="project-card">
-            <div class="project-card__top">
-              <span class="project-card__icon">🤖</span>
-              <div class="project-card__links">
-                <a href="https://github.com/tarunattuluri19" target="_blank" rel="noreferrer" aria-label="Source code">
-                  <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49l-.01-1.7c-2.78.62-3.37-1.21-3.37-1.21-.46-1.18-1.11-1.49-1.11-1.49-.9-.64.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.36 9.36 0 015 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.6.69.49A10.02 10.02 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg>
-                </a>
-              </div>
-            </div>
-            <h3 class="project-card__title">AI Assistant Platform</h3>
-            <p class="project-card__desc">
-              A full‑stack app pairing a Spring Boot API with a React UI to deliver
-              AI‑powered chat and content generation.
-            </p>
-            <ul class="project-card__tags">
-              <li>Java</li><li>Spring</li><li>React</li>
-            </ul>
-          </article>
-
-          <article class="project-card">
-            <div class="project-card__top">
-              <span class="project-card__icon">🛒</span>
-              <div class="project-card__links">
-                <a href="https://github.com/tarunattuluri19" target="_blank" rel="noreferrer" aria-label="Source code">
-                  <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49l-.01-1.7c-2.78.62-3.37-1.21-3.37-1.21-.46-1.18-1.11-1.49-1.11-1.49-.9-.64.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.36 9.36 0 015 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.6.69.49A10.02 10.02 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg>
-                </a>
-              </div>
-            </div>
-            <h3 class="project-card__title">Commerce API</h3>
-            <p class="project-card__desc">
-              A robust REST backend with Node.js &amp; Express handling products, carts
-              and secure checkout flows.
-            </p>
-            <ul class="project-card__tags">
-              <li>Node.js</li><li>Express</li><li>JavaScript</li>
-            </ul>
-          </article>
-
-          <article class="project-card">
-            <div class="project-card__top">
-              <span class="project-card__icon">📊</span>
-              <div class="project-card__links">
-                <a href="https://github.com/tarunattuluri19" target="_blank" rel="noreferrer" aria-label="Source code">
-                  <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49l-.01-1.7c-2.78.62-3.37-1.21-3.37-1.21-.46-1.18-1.11-1.49-1.11-1.49-.9-.64.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.36 9.36 0 015 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.6.69.49A10.02 10.02 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg>
-                </a>
-              </div>
-            </div>
-            <h3 class="project-card__title">Dev Blog</h3>
-            <p class="project-card__desc">
-              My personal space where I write articles and share what I learn about
-              full‑stack and AI development.
-            </p>
-            <ul class="project-card__tags">
-              <li>HTML</li><li>CSS</li><li>JavaScript</li>
-            </ul>
-          </article>
-        </div>
-
-        <div class="projects__more">
-          <a href="https://github.com/tarunattuluri19?tab=repositories" target="_blank" rel="noreferrer" class="btn btn--ghost">
-            See all on GitHub
-            <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h14m-6-6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ CONTACT ============ -->
-    <section class="section section--alt" id="contact">
-      <div class="container">
-        <p class="section__eyebrow">Let's connect</p>
-        <h2 class="section__title">Get In Touch</h2>
-        <p class="section__lead">
-          Got an idea, an opportunity, or just want to talk tech? My inbox is always open.
-        </p>
-
-        <div class="contact__actions">
-          <a href="mailto:tarun@example.com" class="btn btn--primary">
-            <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-            Say Hello
-          </a>
-          <a href="https://github.com/tarunattuluri19" target="_blank" rel="noreferrer" class="btn btn--ghost">Follow on GitHub</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ============ FOOTER ============ -->
-  <footer class="footer">
-    <div class="container footer__inner">
-      <a href="#home" class="nav__logo"><span class="logo-mark">&lt;/&gt;</span> Tarun&nbsp;A</a>
-      <p class="footer__text">Designed &amp; built with ☕ &amp; ❤️ by Tarun A.</p>
-      <p class="footer__copy">© <span id="year"></span> Tarun A. All rights reserved.</p>
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-value">3.5</div>
+      <div class="stat-label">Years Experience</div>
     </div>
-  </footer>
+    <div class="stat-item">
+      <div class="stat-value">40%</div>
+      <div class="stat-label">Perf Boost</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">30%</div>
+      <div class="stat-label">Sprint Velocity↑</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">3</div>
+      <div class="stat-label">Cloud Certs</div>
+    </div>
+  </div>
+</section>
 
-  <a href="#home" class="to-top" id="to-top" aria-label="Back to top">
-    <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 19V5m-7 7l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </a>
+<hr class="divider" />
 
-  <script src="script.js"></script>
-</body>
-</html>
+<!-- SKILLS -->
+<section class="section reveal" id="skills">
+  <p class="section-label">Toolbox</p>
+  <h2 class="section-title">Technical Skills</h2>
+
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-category">Languages</div>
+      <div class="skill-tags">
+        <span class="tag">Java 17</span>
+        <span class="tag">JavaScript</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">Backend</div>
+      <div class="skill-tags">
+        <span class="tag">Spring Boot</span>
+        <span class="tag">Microservices</span>
+        <span class="tag">REST APIs</span>
+        <span class="tag">Node.js</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">Frontend</div>
+      <div class="skill-tags">
+        <span class="tag">React.js</span>
+        <span class="tag">Redux</span>
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">Databases</div>
+      <div class="skill-tags">
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">MongoDB</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">Cloud & DevOps</div>
+      <div class="skill-tags">
+        <span class="tag">AWS</span>
+        <span class="tag">Docker</span>
+        <span class="tag">Kubernetes</span>
+        <span class="tag">Jenkins</span>
+        <span class="tag">CI/CD</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">Messaging & Security</div>
+      <div class="skill-tags">
+        <span class="tag">Apache Kafka</span>
+        <span class="tag">JWT</span>
+        <span class="tag">OAuth2</span>
+        <span class="tag">SSO</span>
+        <span class="tag">Auth0</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">Testing & AI Tools</div>
+      <div class="skill-tags">
+        <span class="tag">JUnit5</span>
+        <span class="tag">Git</span>
+        <span class="tag">Claude Code</span>
+        <span class="tag">GitHub Copilot</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- EXPERIENCE -->
+<section class="section reveal" id="experience">
+  <p class="section-label">Career</p>
+  <h2 class="section-title">Experience</h2>
+
+  <div class="exp-list">
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-role">Software Engineer 2</div>
+        <div class="exp-period">Sep 2023 – Present</div>
+      </div>
+      <div class="exp-company">Cognizant · Bengaluru · Clients: Société Générale / Oxford University Press</div>
+      <ul class="exp-highlights">
+        <li>Developed authentication microservices with Spring Boot, ReactJS, Redux, JWT, and SSO for secure role-based enterprise access.</li>
+        <li>Built scalable full-stack applications with RESTful APIs, optimized CRUD operations, pagination, and responsive UI components.</li>
+        <li>Integrated Auth0 and JWT-based mechanisms for secure login flows and authorization management.</li>
+        <li>Leveraged Claude Code and GitHub Copilot to accelerate debugging, feature delivery, and unit test generation.</li>
+        <li>Implemented Kafka-based async communication between services for event-driven workflows.</li>
+        <li>Worked with Docker and CI/CD pipelines using Git and Jenkins for streamlined deployments.</li>
+        <li>Integrated a chatbot to streamline user access request tracking without additional navigation.</li>
+      </ul>
+      <div class="exp-metrics">
+        <div class="metric">
+          <span class="metric-val">30%</span>
+          <span class="metric-desc">Sprint velocity increase</span>
+        </div>
+        <div class="metric">
+          <span class="metric-val">40%</span>
+          <span class="metric-desc">Page load time reduction</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-role">Full Stack Intern</div>
+        <div class="exp-period">Jan 2023 – Aug 2023</div>
+      </div>
+      <div class="exp-company">Cognizant · Bengaluru</div>
+      <ul class="exp-highlights">
+        <li>Developed a POC for Cognizant's internal business group using external APIs, Java, Spring Boot, AWS, REST, and AuthN/AuthZ.</li>
+        <li>Implemented a reliable and scalable Employee Management System during the internship.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- PROJECTS -->
+<section class="section reveal" id="projects">
+  <p class="section-label">Built</p>
+  <h2 class="section-title">Projects</h2>
+
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-icon">🔐</div>
+      <div class="project-name">Learn AUTH</div>
+      <p class="project-desc">A full-stack MERN authentication app with sign up, log in, log out, and JWT-protected route
