@@ -1,1035 +1,584 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Tarun A — AI Full Stack Java Developer at Cognizant. Building intelligent web experiences with Java, Spring, React and Node.js." />
-  <meta name="author" content="Tarun A" />
-
-  <!-- Open Graph / social preview -->
-  <meta property="og:title" content="Tarun A — AI Full Stack Java Developer" />
-  <meta property="og:description" content="AI Full Stack Java Developer at Cognizant. Java • Spring • React • Node.js" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://tarunattuluri19.github.io/" />
-
-  <title>Tarun A — AI Full Stack Java Developer</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💻</text></svg>" />
-
-  <style>
-  /* ============================================================
-     Tarun A — Portfolio  |  styles
-     ============================================================ */
-
-  /* ---------- Design tokens ---------- */
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LeetCode Study Plan</title>
+<style>
   :root {
-    --bg: #f7f8fc;
-    --bg-alt: #ffffff;
-    --surface: #ffffff;
-    --surface-2: #f1f3fb;
-    --text: #1b1f2a;
-    --text-soft: #5a6172;
-    --border: #e6e9f2;
-
-    --primary: #6c5ce7;
-    --primary-2: #8e7bff;
-    --accent: #00cec9;
-    --gradient: linear-gradient(135deg, #6c5ce7 0%, #00cec9 100%);
-
-    --shadow-sm: 0 2px 8px rgba(20, 23, 40, .06);
-    --shadow-md: 0 10px 30px rgba(20, 23, 40, .10);
-    --shadow-lg: 0 24px 60px rgba(20, 23, 40, .16);
-
-    --radius: 16px;
-    --radius-lg: 24px;
-    --container: 1140px;
-    --header-h: 72px;
-
-    --font: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --border: #2a2d3a;
+    --accent: #f89c1c;
+    --accent2: #5b8af5;
+    --text: #e2e4ef;
+    --muted: #7a7f99;
+    --easy: #00b8a3;
+    --medium: #f89c1c;
+    --hard: #ef4743;
+    --tag-bg: #23263a;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f5f6fa;
+      --surface: #ffffff;
+      --border: #e0e3ef;
+      --accent: #d97706;
+      --accent2: #3b6fd4;
+      --text: #1a1d2e;
+      --muted: #6b7280;
+      --tag-bg: #eef0f8;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a;
+    --accent: #f89c1c; --accent2: #5b8af5; --text: #e2e4ef;
+    --muted: #7a7f99; --tag-bg: #23263a;
   }
 
-  [data-theme="dark"] {
-    --bg: #0d1017;
-    --bg-alt: #11151f;
-    --surface: #151a26;
-    --surface-2: #1b2231;
-    --text: #e8ecf6;
-    --text-soft: #9aa3b8;
-    --border: #232b3d;
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.6; }
 
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, .35);
-    --shadow-md: 0 12px 34px rgba(0, 0, 0, .45);
-    --shadow-lg: 0 26px 64px rgba(0, 0, 0, .55);
-  }
-
-  /* ---------- Reset ---------- */
-  *,
-  *::before,
-  *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); }
-
-  body {
-    font-family: var(--font);
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.65;
-    overflow-x: hidden;
-    transition: background .4s ease, color .4s ease;
-  }
-
-  a { text-decoration: none; color: inherit; }
-  ul { list-style: none; }
-  img { display: block; max-width: 100%; }
-  section { scroll-margin-top: var(--header-h); }
-
-  /* ---------- Layout helpers ---------- */
-  .container {
-    width: 100%;
-    max-width: var(--container);
-    margin-inline: auto;
-    padding-inline: 1.5rem;
-  }
-
-  .section { padding-block: 6rem; position: relative; }
-  .section--alt { background: var(--bg-alt); }
-
-  .section__eyebrow {
-    text-transform: uppercase;
-    letter-spacing: .18em;
-    font-size: .8rem;
-    font-weight: 600;
-    color: var(--primary);
-    margin-bottom: .5rem;
-  }
-
-  .section__title {
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
-    font-weight: 800;
-    letter-spacing: -.02em;
-    margin-bottom: 1rem;
-  }
-
-  .section__title::after {
-    content: "";
-    display: block;
-    width: 64px;
-    height: 4px;
-    border-radius: 99px;
-    background: var(--gradient);
-    margin-top: .75rem;
-  }
-
-  .section__lead {
-    color: var(--text-soft);
-    max-width: 620px;
-    margin-bottom: 2.5rem;
-  }
-
-  /* ---------- Animated background ---------- */
-  .bg-blobs {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    overflow: hidden;
-    pointer-events: none;
-  }
-  .blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: .35;
-    animation: float 18s ease-in-out infinite;
-  }
-  .blob-1 { width: 420px; height: 420px; background: #6c5ce7; top: -120px; left: -80px; }
-  .blob-2 { width: 360px; height: 360px; background: #00cec9; bottom: -100px; right: -60px; animation-delay: -6s; }
-  .blob-3 { width: 300px; height: 300px; background: #ff7eb3; top: 40%; right: 30%; animation-delay: -12s; opacity: .22; }
-
-  @keyframes float {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33%      { transform: translate(40px, -30px) scale(1.1); }
-    66%      { transform: translate(-30px, 30px) scale(.95); }
-  }
-
-  /* ---------- Buttons ---------- */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: .5rem;
-    padding: .85rem 1.6rem;
-    border-radius: 99px;
-    font-weight: 600;
-    font-size: .95rem;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
-    will-change: transform;
-  }
-  .btn svg { transition: transform .25s ease; }
-  .btn:hover svg { transform: translateX(4px); }
-
-  .btn--primary {
-    background: var(--gradient);
-    color: #fff;
-    box-shadow: 0 8px 24px rgba(108, 92, 231, .35);
-  }
-  .btn--primary:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(108, 92, 231, .45); }
-
-  .btn--ghost {
-    background: transparent;
-    color: var(--text);
-    border-color: var(--border);
-  }
-  .btn--ghost:hover { transform: translateY(-3px); border-color: var(--primary); color: var(--primary); }
-
-  /* ---------- Navbar ---------- */
-  .navbar {
-    position: fixed;
-    inset: 0 0 auto 0;
-    height: var(--header-h);
-    display: flex;
-    align-items: center;
-    z-index: 100;
-    transition: background .3s ease, box-shadow .3s ease, backdrop-filter .3s ease;
-  }
-  .navbar.scrolled {
-    background: color-mix(in srgb, var(--bg-alt) 80%, transparent);
-    backdrop-filter: blur(14px);
-    box-shadow: var(--shadow-sm);
+  header {
+    background: var(--surface);
     border-bottom: 1px solid var(--border);
+    padding: 20px 24px;
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  }
+  header h1 { font-size: 1.2rem; font-weight: 700; color: var(--accent); }
+  .header-meta { color: var(--muted); font-size: 0.85rem; }
+
+  .controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  input[type="search"] {
+    background: var(--bg); border: 1px solid var(--border); color: var(--text);
+    border-radius: 8px; padding: 6px 12px; font-size: 0.85rem; outline: none; width: 200px;
+  }
+  input[type="search"]:focus { border-color: var(--accent2); }
+
+  .progress-bar-wrap { height: 3px; background: var(--border); }
+  .progress-bar { height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); width: 0; transition: width 0.4s; }
+
+  main { max-width: 900px; margin: 0 auto; padding: 24px 16px; }
+
+  .week-badge {
+    display: inline-block; background: var(--accent2); color: #fff;
+    font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 20px;
+    margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase;
   }
 
-  .nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
+  section { margin-bottom: 32px; }
+  section h2 {
+    font-size: 1rem; font-weight: 700; color: var(--text);
+    margin-bottom: 12px; padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+    display: flex; align-items: center; justify-content: space-between;
   }
+  .section-count { font-size: 0.8rem; color: var(--muted); font-weight: 400; }
 
-  .nav__logo {
-    font-weight: 800;
-    font-size: 1.25rem;
-    display: inline-flex;
-    align-items: center;
-    gap: .4rem;
-    letter-spacing: -.02em;
+  ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+  li {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; display: flex; align-items: center; gap: 10px;
+    padding: 8px 12px; transition: border-color 0.15s;
   }
-  .logo-mark {
-    font-family: var(--mono);
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
+  li:hover { border-color: var(--accent2); }
+  li.done { opacity: 0.45; }
+  li.done a { text-decoration: line-through; }
 
-  .nav__menu { display: flex; gap: .35rem; }
-  .nav__link {
-    position: relative;
-    padding: .5rem .9rem;
-    font-weight: 500;
-    color: var(--text-soft);
-    border-radius: 99px;
-    transition: color .25s ease, background .25s ease;
-  }
-  .nav__link:hover { color: var(--text); }
-  .nav__link.active { color: var(--primary); background: color-mix(in srgb, var(--primary) 12%, transparent); }
+  input[type="checkbox"] { accent-color: var(--accent); width: 15px; height: 15px; flex-shrink: 0; cursor: pointer; }
 
-  .nav__actions { display: flex; align-items: center; gap: .5rem; }
+  .num { color: var(--muted); font-size: 0.78rem; min-width: 34px; font-family: monospace; }
+  a { color: var(--accent2); text-decoration: none; font-size: 0.9rem; flex: 1; }
+  a:hover { text-decoration: underline; }
 
-  .theme-toggle {
-    display: grid;
-    place-items: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--text);
-    cursor: pointer;
-    transition: transform .25s ease, border-color .25s ease;
+  .diff {
+    font-size: 0.7rem; font-weight: 700; padding: 1px 7px;
+    border-radius: 20px; flex-shrink: 0; text-transform: uppercase; letter-spacing: 0.3px;
   }
-  .theme-toggle:hover { transform: rotate(20deg); border-color: var(--primary); }
-  .theme-toggle .icon-moon { display: none; }
-  [data-theme="dark"] .theme-toggle .icon-sun { display: none; }
-  [data-theme="dark"] .theme-toggle .icon-moon { display: block; }
+  .E { background: rgba(0,184,163,0.15); color: var(--easy); }
+  .M { background: rgba(248,156,28,0.15); color: var(--medium); }
+  .H { background: rgba(239,71,67,0.15); color: var(--hard); }
 
-  .nav__toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    width: 42px;
-    height: 42px;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: var(--surface);
-    cursor: pointer;
-  }
-  .nav__toggle span {
-    display: block;
-    width: 20px;
-    height: 2px;
-    margin-inline: auto;
-    background: var(--text);
-    border-radius: 2px;
-    transition: transform .3s ease, opacity .3s ease;
-  }
-  .nav__toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .nav__toggle.open span:nth-child(2) { opacity: 0; }
-  .nav__toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .revisit { font-size: 0.68rem; color: var(--accent); background: rgba(248,156,28,0.1); padding: 1px 6px; border-radius: 10px; }
 
-  /* ---------- Hero ---------- */
-  .hero { padding-top: calc(var(--header-h) + 4rem); }
-  .hero__grid {
-    display: grid;
-    grid-template-columns: 1.1fr .9fr;
-    gap: 3rem;
-    align-items: center;
+  .stats {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px 20px; margin-bottom: 28px;
+    display: flex; gap: 24px; flex-wrap: wrap;
   }
+  .stat { text-align: center; }
+  .stat-val { font-size: 1.5rem; font-weight: 800; color: var(--accent); }
+  .stat-label { font-size: 0.75rem; color: var(--muted); }
 
-  .hero__greet { color: var(--text-soft); font-weight: 500; }
-  .hero__title {
-    font-size: clamp(2.6rem, 7vw, 4.4rem);
-    font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -.03em;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    margin-block: .3rem .4rem;
+  .schedule {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px 20px; margin-bottom: 28px;
   }
-  .hero__subtitle {
-    font-size: clamp(1.15rem, 3vw, 1.6rem);
-    font-weight: 600;
-    min-height: 2.2em;
+  .schedule h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; }
+  .schedule-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  .schedule-item {
+    background: var(--tag-bg); border-radius: 8px; padding: 8px 12px;
+    font-size: 0.8rem; border-left: 3px solid var(--accent2);
   }
-  .typed { color: var(--primary); }
-  .typed::after {
-    content: "|";
-    color: var(--accent);
-    animation: blink 1s step-end infinite;
-  }
-  @keyframes blink { 50% { opacity: 0; } }
+  .schedule-item strong { display: block; color: var(--accent2); }
 
-  .hero__text {
-    color: var(--text-soft);
-    max-width: 520px;
-    margin-block: 1.2rem 2rem;
+  @media (max-width: 600px) {
+    header { flex-direction: column; align-items: flex-start; }
+    input[type="search"] { width: 100%; }
   }
-
-  .hero__cta { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
-
-  .hero__socials { display: flex; gap: .8rem; }
-  .social-link {
-    display: grid;
-    place-items: center;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    color: var(--text-soft);
-    box-shadow: var(--shadow-sm);
-    transition: transform .25s ease, color .25s ease, border-color .25s ease;
-  }
-  .social-link:hover { transform: translateY(-4px); color: var(--primary); border-color: var(--primary); }
-
-  /* ---------- Hero code card ---------- */
-  .hero__visual { display: flex; justify-content: center; }
-  .code-card {
-    width: 100%;
-    max-width: 440px;
-    background: #11151f;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-lg);
-    overflow: hidden;
-    border: 1px solid #232b3d;
-    transform: perspective(1200px) rotateY(-7deg) rotateX(3deg);
-    transition: transform .5s ease;
-  }
-  .code-card:hover { transform: perspective(1200px) rotateY(0deg) rotateX(0deg); }
-  .code-card__bar {
-    display: flex;
-    align-items: center;
-    gap: .5rem;
-    padding: .8rem 1rem;
-    background: #0d1017;
-    border-bottom: 1px solid #232b3d;
-  }
-  .dot { width: 12px; height: 12px; border-radius: 50%; }
-  .dot--red { background: #ff5f56; }
-  .dot--yellow { background: #ffbd2e; }
-  .dot--green { background: #27c93f; }
-  .code-card__file {
-    margin-left: auto;
-    font-family: var(--mono);
-    font-size: .78rem;
-    color: #6b7488;
-  }
-  .code-card__body {
-    margin: 0;
-    padding: 1.3rem 1.4rem;
-    font-family: var(--mono);
-    font-size: .85rem;
-    line-height: 1.7;
-    color: #c7d0e0;
-    overflow-x: auto;
-  }
-  .c-key { color: #8e7bff; }
-  .c-cls { color: #00cec9; }
-  .c-str { color: #7be08a; }
-  .c-num { color: #ffbd6b; }
-  .c-cmt { color: #5a6172; font-style: italic; }
-
-  /* ---------- About ---------- */
-  .about__grid {
-    display: grid;
-    grid-template-columns: 1.1fr .9fr;
-    gap: 3rem;
-    align-items: center;
-  }
-  .about__text p { color: var(--text-soft); margin-bottom: 1.2rem; }
-  .about__list { display: grid; gap: .7rem; margin-bottom: 1.8rem; }
-  .about__list li {
-    padding: .75rem 1rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    box-shadow: var(--shadow-sm);
-  }
-  .about__list a { color: var(--primary); font-weight: 600; }
-  .about__text strong { color: var(--text); }
-
-  .about__cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-  .stat-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.6rem 1.2rem;
-    text-align: center;
-    box-shadow: var(--shadow-sm);
-    transition: transform .3s ease, box-shadow .3s ease;
-  }
-  .stat-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
-  .stat-card__num {
-    display: block;
-    font-size: 1.35rem;
-    font-weight: 800;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-  .stat-card__label { font-size: .85rem; color: var(--text-soft); }
-
-  /* ---------- Skills ---------- */
-  .skills__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 1.2rem;
-  }
-  .skill {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: .8rem;
-    padding: 1.6rem 1rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-sm);
-    font-weight: 600;
-    font-size: .9rem;
-    transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
-  }
-  .skill img { width: 48px; height: 48px; transition: transform .3s ease; }
-  .skill:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); border-color: var(--primary); }
-  .skill:hover img { transform: scale(1.12) rotate(-6deg); }
-
-  /* ---------- Projects ---------- */
-  .projects__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.6rem;
-  }
-  .project-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 1.8rem;
-    box-shadow: var(--shadow-sm);
-    position: relative;
-    overflow: hidden;
-    transition: transform .3s ease, box-shadow .3s ease;
-  }
-  .project-card::before {
-    content: "";
-    position: absolute;
-    inset: 0 0 auto 0;
-    height: 4px;
-    background: var(--gradient);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform .4s ease;
-  }
-  .project-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); }
-  .project-card:hover::before { transform: scaleX(1); }
-
-  .project-card__top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-  }
-  .project-card__icon { font-size: 2.2rem; }
-  .project-card__links a {
-    display: grid;
-    place-items: center;
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    color: var(--text-soft);
-    background: var(--surface-2);
-    transition: color .25s ease, transform .25s ease;
-  }
-  .project-card__links a:hover { color: var(--primary); transform: translateY(-2px); }
-
-  .project-card__title { font-size: 1.2rem; font-weight: 700; margin-bottom: .5rem; }
-  .project-card__desc { color: var(--text-soft); font-size: .92rem; margin-bottom: 1.2rem; }
-  .project-card__tags { display: flex; flex-wrap: wrap; gap: .5rem; }
-  .project-card__tags li {
-    font-size: .75rem;
-    font-weight: 600;
-    padding: .3rem .75rem;
-    border-radius: 99px;
-    color: var(--primary);
-    background: color-mix(in srgb, var(--primary) 12%, transparent);
-  }
-
-  .projects__more { text-align: center; margin-top: 2.5rem; }
-
-  /* ---------- Contact ---------- */
-  .contact__actions { display: flex; flex-wrap: wrap; gap: 1rem; }
-
-  /* ---------- Footer ---------- */
-  .footer {
-    background: var(--bg-alt);
-    border-top: 1px solid var(--border);
-    padding-block: 2.5rem;
-  }
-  .footer__inner { text-align: center; display: grid; gap: .5rem; place-items: center; }
-  .footer__text { color: var(--text-soft); }
-  .footer__copy { color: var(--text-soft); font-size: .85rem; }
-
-  /* ---------- Back to top ---------- */
-  .to-top {
-    position: fixed;
-    right: 1.5rem;
-    bottom: 1.5rem;
-    display: grid;
-    place-items: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: var(--gradient);
-    color: #fff;
-    box-shadow: var(--shadow-md);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-    transition: opacity .3s ease, transform .3s ease, visibility .3s ease;
-    z-index: 90;
-  }
-  .to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
-  .to-top:hover { transform: translateY(-4px); }
-
-  /* ---------- Scroll reveal ---------- */
-  .reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity .7s ease, transform .7s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  /* ---------- Responsive ---------- */
-  @media (max-width: 900px) {
-    .hero__grid,
-    .about__grid { grid-template-columns: 1fr; }
-    .hero__visual { order: -1; }
-    .code-card { transform: none; max-width: 380px; }
-    .about__cards { max-width: 480px; }
-  }
-
-  @media (max-width: 720px) {
-    .nav__menu {
-      position: fixed;
-      inset: var(--header-h) 0 auto 0;
-      flex-direction: column;
-      gap: .25rem;
-      padding: 1rem 1.5rem 1.5rem;
-      background: var(--bg-alt);
-      border-bottom: 1px solid var(--border);
-      box-shadow: var(--shadow-md);
-      transform: translateY(-120%);
-      transition: transform .35s ease;
-    }
-    .nav__menu.open { transform: translateY(0); }
-    .nav__link { display: block; padding: .8rem 1rem; border-radius: 12px; }
-    .nav__toggle { display: flex; }
-    .section { padding-block: 4rem; }
-  }
-
-  @media (max-width: 420px) {
-    .hero__cta .btn { width: 100%; justify-content: center; }
-    .about__cards { grid-template-columns: 1fr; }
-  }
-
-  /* ---------- Reduced motion ---------- */
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: .001ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: .001ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
-  </style>
+</style>
 </head>
 <body>
-  <!-- Animated background blobs -->
-  <div class="bg-blobs" aria-hidden="true">
-    <span class="blob blob-1"></span>
-    <span class="blob blob-2"></span>
-    <span class="blob blob-3"></span>
+
+<div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
+
+<header>
+  <div>
+    <h1>🧠 LeetCode Study Plan</h1>
+    <div class="header-meta">12-week roadmap · <span id="doneCount">0</span> / <span id="totalCount">0</span> solved</div>
   </div>
+  <div class="controls">
+    <input type="search" id="searchBox" placeholder="Search problems…" />
+  </div>
+</header>
 
-  <!-- ============ NAVBAR ============ -->
-  <header class="navbar" id="navbar">
-    <nav class="nav container">
-      <a href="#home" class="nav__logo">
-        <span class="logo-mark">&lt;/&gt;</span> Tarun&nbsp;A
-      </a>
+<main>
 
-      <ul class="nav__menu" id="nav-menu">
-        <li><a href="#home" class="nav__link active">Home</a></li>
-        <li><a href="#about" class="nav__link">About</a></li>
-        <li><a href="#skills" class="nav__link">Skills</a></li>
-        <li><a href="#projects" class="nav__link">Projects</a></li>
-        <li><a href="#contact" class="nav__link">Contact</a></li>
-      </ul>
+<div class="stats">
+  <div class="stat"><div class="stat-val" id="s-easy" style="color:var(--easy)">0</div><div class="stat-label">Easy</div></div>
+  <div class="stat"><div class="stat-val" id="s-medium" style="color:var(--medium)">0</div><div class="stat-label">Medium</div></div>
+  <div class="stat"><div class="stat-val" id="s-hard" style="color:var(--hard)">0</div><div class="stat-label">Hard</div></div>
+  <div class="stat"><div class="stat-val" id="s-total">0</div><div class="stat-label">Total</div></div>
+</div>
 
-      <div class="nav__actions">
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark / light theme">
-          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20"><path d="M12 17a5 5 0 100-10 5 5 0 000 10zm0 2a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zm0-18a1 1 0 011 1v1a1 1 0 11-2 0V2a1 1 0 011-1zm10 11a1 1 0 010 2h-1a1 1 0 110-2h1zM3 12a1 1 0 010 2H2a1 1 0 110-2h1zm15.07-7.07a1 1 0 011.41 1.41l-.7.71a1 1 0 11-1.42-1.42l.71-.7zM5.64 17.66a1 1 0 011.41 1.41l-.7.71a1 1 0 11-1.42-1.42l.71-.7zm12.73 0l.7.71a1 1 0 01-1.41 1.41l-.71-.7a1 1 0 011.42-1.42zM6.34 4.93l.71.7A1 1 0 015.64 7.05l-.7-.71a1 1 0 011.41-1.41z" fill="currentColor"/></svg>
-          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"/></svg>
-        </button>
+<div class="schedule">
+  <h3>📅 12-Week Schedule</h3>
+  <div class="schedule-grid">
+    <div class="schedule-item"><strong>Weeks 1–2</strong>Arrays, hashing, two pointers, sliding window</div>
+    <div class="schedule-item"><strong>Weeks 3–4</strong>Stack, binary search, linked lists</div>
+    <div class="schedule-item"><strong>Weeks 5–6</strong>Trees, tries, heaps</div>
+    <div class="schedule-item"><strong>Weeks 7–8</strong>Backtracking and graphs</div>
+    <div class="schedule-item"><strong>Weeks 9–10</strong>Dynamic programming</div>
+    <div class="schedule-item"><strong>Week 11</strong>Intervals, math, bit manipulation</div>
+    <div class="schedule-item"><strong>Week 12</strong>Redo every missed medium/hard without notes</div>
+  </div>
+</div>
 
-        <button class="nav__toggle" id="nav-toggle" aria-label="Open menu">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </nav>
-  </header>
+<div id="sectionsContainer"></div>
 
-  <main>
-    <!-- ============ HERO ============ -->
-    <section class="hero section" id="home">
-      <div class="container hero__grid">
-        <div class="hero__content">
-          <p class="hero__greet">👋 Hi there, I'm</p>
-          <h1 class="hero__title">Tarun&nbsp;A</h1>
-          <h2 class="hero__subtitle">
-            A passionate <span class="typed" id="typed"></span>
-          </h2>
-          <p class="hero__text">
-            I build intelligent, end‑to‑end web applications — blending solid Java &amp;
-            Spring backends with modern React front‑ends, and exploring how AI can
-            supercharge the way we ship software.
-          </p>
+</main>
 
-          <div class="hero__cta">
-            <a href="#projects" class="btn btn--primary">
-              View My Work
-              <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h14m-6-6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-            <a href="#contact" class="btn btn--ghost">Get in Touch</a>
-          </div>
+<script>
+const SECTIONS = [
+  {
+    title: "1. Arrays, Hashing, and Strings",
+    week: "Weeks 1–2",
+    problems: [
+      {id:1,name:"Two Sum",slug:"two-sum",diff:"E"},
+      {id:217,name:"Contains Duplicate",slug:"contains-duplicate",diff:"E"},
+      {id:219,name:"Contains Duplicate II",slug:"contains-duplicate-ii",diff:"E"},
+      {id:242,name:"Valid Anagram",slug:"valid-anagram",diff:"E"},
+      {id:49,name:"Group Anagrams",slug:"group-anagrams",diff:"M"},
+      {id:347,name:"Top K Frequent Elements",slug:"top-k-frequent-elements",diff:"M"},
+      {id:238,name:"Product of Array Except Self",slug:"product-of-array-except-self",diff:"M"},
+      {id:36,name:"Valid Sudoku",slug:"valid-sudoku",diff:"M"},
+      {id:128,name:"Longest Consecutive Sequence",slug:"longest-consecutive-sequence",diff:"M"},
+      {id:169,name:"Majority Element",slug:"majority-element",diff:"E"},
+      {id:274,name:"H-Index",slug:"h-index",diff:"M"},
+      {id:380,name:"Insert Delete GetRandom O(1)",slug:"insert-delete-getrandom-o1",diff:"M"},
+      {id:383,name:"Ransom Note",slug:"ransom-note",diff:"E"},
+      {id:205,name:"Isomorphic Strings",slug:"isomorphic-strings",diff:"E"},
+      {id:290,name:"Word Pattern",slug:"word-pattern",diff:"E"},
+      {id:202,name:"Happy Number",slug:"happy-number",diff:"E"},
+      {id:13,name:"Roman to Integer",slug:"roman-to-integer",diff:"E"},
+      {id:12,name:"Integer to Roman",slug:"integer-to-roman",diff:"M"},
+      {id:58,name:"Length of Last Word",slug:"length-of-last-word",diff:"E"},
+      {id:14,name:"Longest Common Prefix",slug:"longest-common-prefix",diff:"E"},
+      {id:151,name:"Reverse Words in a String",slug:"reverse-words-in-a-string",diff:"M"},
+      {id:6,name:"Zigzag Conversion",slug:"zigzag-conversion",diff:"M"},
+      {id:28,name:"Find the Index of the First Occurrence in a String",slug:"find-the-index-of-the-first-occurrence-in-a-string",diff:"E"},
+      {id:68,name:"Text Justification",slug:"text-justification",diff:"H"},
+      {id:228,name:"Summary Ranges",slug:"summary-ranges",diff:"E"},
+    ]
+  },
+  {
+    title: "2. Array Manipulation, Prefix/Suffix, and Greedy Basics",
+    week: "Weeks 1–2",
+    problems: [
+      {id:88,name:"Merge Sorted Array",slug:"merge-sorted-array",diff:"E"},
+      {id:27,name:"Remove Element",slug:"remove-element",diff:"E"},
+      {id:26,name:"Remove Duplicates from Sorted Array",slug:"remove-duplicates-from-sorted-array",diff:"E"},
+      {id:80,name:"Remove Duplicates from Sorted Array II",slug:"remove-duplicates-from-sorted-array-ii",diff:"M"},
+      {id:189,name:"Rotate Array",slug:"rotate-array",diff:"M"},
+      {id:121,name:"Best Time to Buy and Sell Stock",slug:"best-time-to-buy-and-sell-stock",diff:"E"},
+      {id:122,name:"Best Time to Buy and Sell Stock II",slug:"best-time-to-buy-and-sell-stock-ii",diff:"M"},
+      {id:53,name:"Maximum Subarray",slug:"maximum-subarray",diff:"M"},
+      {id:918,name:"Maximum Sum Circular Subarray",slug:"maximum-sum-circular-subarray",diff:"M"},
+      {id:152,name:"Maximum Product Subarray",slug:"maximum-product-subarray",diff:"M"},
+      {id:55,name:"Jump Game",slug:"jump-game",diff:"M"},
+      {id:45,name:"Jump Game II",slug:"jump-game-ii",diff:"M"},
+      {id:134,name:"Gas Station",slug:"gas-station",diff:"M"},
+      {id:135,name:"Candy",slug:"candy",diff:"H"},
+      {id:846,name:"Hand of Straights",slug:"hand-of-straights",diff:"M"},
+    ]
+  },
+  {
+    title: "3. Two Pointers",
+    week: "Weeks 1–2",
+    problems: [
+      {id:125,name:"Valid Palindrome",slug:"valid-palindrome",diff:"E"},
+      {id:392,name:"Is Subsequence",slug:"is-subsequence",diff:"E"},
+      {id:167,name:"Two Sum II – Input Array Is Sorted",slug:"two-sum-ii-input-array-is-sorted",diff:"M"},
+      {id:11,name:"Container With Most Water",slug:"container-with-most-water",diff:"M"},
+      {id:15,name:"3Sum",slug:"3sum",diff:"M"},
+      {id:42,name:"Trapping Rain Water",slug:"trapping-rain-water",diff:"H"},
+    ]
+  },
+  {
+    title: "4. Sliding Window",
+    week: "Weeks 1–2",
+    problems: [
+      {id:209,name:"Minimum Size Subarray Sum",slug:"minimum-size-subarray-sum",diff:"M"},
+      {id:3,name:"Longest Substring Without Repeating Characters",slug:"longest-substring-without-repeating-characters",diff:"M"},
+      {id:424,name:"Longest Repeating Character Replacement",slug:"longest-repeating-character-replacement",diff:"M"},
+      {id:567,name:"Permutation in String",slug:"permutation-in-string",diff:"M"},
+      {id:76,name:"Minimum Window Substring",slug:"minimum-window-substring",diff:"H"},
+      {id:239,name:"Sliding Window Maximum",slug:"sliding-window-maximum",diff:"H"},
+      {id:30,name:"Substring with Concatenation of All Words",slug:"substring-with-concatenation-of-all-words",diff:"H"},
+    ]
+  },
+  {
+    title: "5. Matrix",
+    week: "Weeks 1–2",
+    problems: [
+      {id:54,name:"Spiral Matrix",slug:"spiral-matrix",diff:"M"},
+      {id:48,name:"Rotate Image",slug:"rotate-image",diff:"M"},
+      {id:73,name:"Set Matrix Zeroes",slug:"set-matrix-zeroes",diff:"M"},
+      {id:289,name:"Game of Life",slug:"game-of-life",diff:"M"},
+    ]
+  },
+  {
+    title: "6. Intervals",
+    week: "Week 11",
+    problems: [
+      {id:56,name:"Merge Intervals",slug:"merge-intervals",diff:"M"},
+      {id:57,name:"Insert Interval",slug:"insert-interval",diff:"M"},
+      {id:435,name:"Non-overlapping Intervals",slug:"non-overlapping-intervals",diff:"M"},
+      {id:252,name:"Meeting Rooms",slug:"meeting-rooms",diff:"E"},
+      {id:253,name:"Meeting Rooms II",slug:"meeting-rooms-ii",diff:"M"},
+      {id:452,name:"Minimum Number of Arrows to Burst Balloons",slug:"minimum-number-of-arrows-to-burst-balloons",diff:"M"},
+    ]
+  },
+  {
+    title: "7. Stack and Monotonic Stack",
+    week: "Weeks 3–4",
+    problems: [
+      {id:20,name:"Valid Parentheses",slug:"valid-parentheses",diff:"E"},
+      {id:155,name:"Min Stack",slug:"min-stack",diff:"M"},
+      {id:150,name:"Evaluate Reverse Polish Notation",slug:"evaluate-reverse-polish-notation",diff:"M"},
+      {id:22,name:"Generate Parentheses",slug:"generate-parentheses",diff:"M"},
+      {id:739,name:"Daily Temperatures",slug:"daily-temperatures",diff:"M"},
+      {id:853,name:"Car Fleet",slug:"car-fleet",diff:"M"},
+      {id:84,name:"Largest Rectangle in Histogram",slug:"largest-rectangle-in-histogram",diff:"H"},
+      {id:71,name:"Simplify Path",slug:"simplify-path",diff:"M"},
+      {id:224,name:"Basic Calculator",slug:"basic-calculator",diff:"H"},
+      {id:227,name:"Basic Calculator II",slug:"basic-calculator-ii",diff:"M"},
+      {id:32,name:"Longest Valid Parentheses",slug:"longest-valid-parentheses",diff:"H"},
+    ]
+  },
+  {
+    title: "8. Binary Search",
+    week: "Weeks 3–4",
+    problems: [
+      {id:704,name:"Binary Search",slug:"binary-search",diff:"E"},
+      {id:35,name:"Search Insert Position",slug:"search-insert-position",diff:"E"},
+      {id:74,name:"Search a 2D Matrix",slug:"search-a-2d-matrix",diff:"M"},
+      {id:162,name:"Find Peak Element",slug:"find-peak-element",diff:"M"},
+      {id:875,name:"Koko Eating Bananas",slug:"koko-eating-bananas",diff:"M"},
+      {id:34,name:"Find First and Last Position of Element in Sorted Array",slug:"find-first-and-last-position-of-element-in-sorted-array",diff:"M"},
+      {id:153,name:"Find Minimum in Rotated Sorted Array",slug:"find-minimum-in-rotated-sorted-array",diff:"M"},
+      {id:33,name:"Search in Rotated Sorted Array",slug:"search-in-rotated-sorted-array",diff:"M"},
+      {id:981,name:"Time Based Key-Value Store",slug:"time-based-key-value-store",diff:"M"},
+      {id:4,name:"Median of Two Sorted Arrays",slug:"median-of-two-sorted-arrays",diff:"H"},
+    ]
+  },
+  {
+    title: "9. Linked Lists",
+    week: "Weeks 3–4",
+    problems: [
+      {id:206,name:"Reverse Linked List",slug:"reverse-linked-list",diff:"E"},
+      {id:21,name:"Merge Two Sorted Lists",slug:"merge-two-sorted-lists",diff:"E"},
+      {id:143,name:"Reorder List",slug:"reorder-list",diff:"M"},
+      {id:19,name:"Remove Nth Node From End of List",slug:"remove-nth-node-from-end-of-list",diff:"M"},
+      {id:141,name:"Linked List Cycle",slug:"linked-list-cycle",diff:"E"},
+      {id:160,name:"Intersection of Two Linked Lists",slug:"intersection-of-two-linked-lists",diff:"E"},
+      {id:2,name:"Add Two Numbers",slug:"add-two-numbers",diff:"M"},
+      {id:138,name:"Copy List with Random Pointer",slug:"copy-list-with-random-pointer",diff:"M"},
+      {id:92,name:"Reverse Linked List II",slug:"reverse-linked-list-ii",diff:"M"},
+      {id:25,name:"Reverse Nodes in k-Group",slug:"reverse-nodes-in-k-group",diff:"H"},
+      {id:82,name:"Remove Duplicates from Sorted List II",slug:"remove-duplicates-from-sorted-list-ii",diff:"M"},
+      {id:61,name:"Rotate List",slug:"rotate-list",diff:"M"},
+      {id:86,name:"Partition List",slug:"partition-list",diff:"M"},
+      {id:23,name:"Merge K Sorted Lists",slug:"merge-k-sorted-lists",diff:"H"},
+      {id:146,name:"LRU Cache",slug:"lru-cache",diff:"M"},
+    ]
+  },
+  {
+    title: "10. Trees and Binary Search Trees",
+    week: "Weeks 5–6",
+    problems: [
+      {id:104,name:"Maximum Depth of Binary Tree",slug:"maximum-depth-of-binary-tree",diff:"E"},
+      {id:100,name:"Same Tree",slug:"same-tree",diff:"E"},
+      {id:226,name:"Invert Binary Tree",slug:"invert-binary-tree",diff:"E"},
+      {id:101,name:"Symmetric Tree",slug:"symmetric-tree",diff:"E"},
+      {id:572,name:"Subtree of Another Tree",slug:"subtree-of-another-tree",diff:"E"},
+      {id:102,name:"Binary Tree Level Order Traversal",slug:"binary-tree-level-order-traversal",diff:"M"},
+      {id:103,name:"Binary Tree Zigzag Level Order Traversal",slug:"binary-tree-zigzag-level-order-traversal",diff:"M"},
+      {id:199,name:"Binary Tree Right Side View",slug:"binary-tree-right-side-view",diff:"M"},
+      {id:637,name:"Average of Levels in Binary Tree",slug:"average-of-levels-in-binary-tree",diff:"E"},
+      {id:112,name:"Path Sum",slug:"path-sum",diff:"E"},
+      {id:129,name:"Sum Root to Leaf Numbers",slug:"sum-root-to-leaf-numbers",diff:"M"},
+      {id:105,name:"Construct Binary Tree from Preorder and Inorder Traversal",slug:"construct-binary-tree-from-preorder-and-inorder-traversal",diff:"M"},
+      {id:106,name:"Construct Binary Tree from Inorder and Postorder Traversal",slug:"construct-binary-tree-from-inorder-and-postorder-traversal",diff:"M"},
+      {id:114,name:"Flatten Binary Tree to Linked List",slug:"flatten-binary-tree-to-linked-list",diff:"M"},
+      {id:117,name:"Populating Next Right Pointers in Each Node II",slug:"populating-next-right-pointers-in-each-node-ii",diff:"M"},
+      {id:98,name:"Validate Binary Search Tree",slug:"validate-binary-search-tree",diff:"M"},
+      {id:230,name:"Kth Smallest Element in a BST",slug:"kth-smallest-element-in-a-bst",diff:"M"},
+      {id:530,name:"Minimum Absolute Difference in BST",slug:"minimum-absolute-difference-in-bst",diff:"E"},
+      {id:236,name:"Lowest Common Ancestor of a Binary Tree",slug:"lowest-common-ancestor-of-a-binary-tree",diff:"M"},
+      {id:124,name:"Binary Tree Maximum Path Sum",slug:"binary-tree-maximum-path-sum",diff:"H"},
+      {id:173,name:"Binary Search Tree Iterator",slug:"binary-search-tree-iterator",diff:"M"},
+      {id:222,name:"Count Complete Tree Nodes",slug:"count-complete-tree-nodes",diff:"E"},
+      {id:297,name:"Serialize and Deserialize Binary Tree",slug:"serialize-and-deserialize-binary-tree",diff:"H"},
+      {id:108,name:"Convert Sorted Array to Binary Search Tree",slug:"convert-sorted-array-to-binary-search-tree",diff:"E"},
+      {id:427,name:"Construct Quad Tree",slug:"construct-quad-tree",diff:"M"},
+    ]
+  },
+  {
+    title: "11. Tries",
+    week: "Weeks 5–6",
+    problems: [
+      {id:208,name:"Implement Trie (Prefix Tree)",slug:"implement-trie-prefix-tree",diff:"M"},
+      {id:211,name:"Design Add and Search Words Data Structure",slug:"design-add-and-search-words-data-structure",diff:"M"},
+      {id:212,name:"Word Search II",slug:"word-search-ii",diff:"H"},
+      {id:336,name:"Palindrome Pairs",slug:"palindrome-pairs",diff:"H"},
+    ]
+  },
+  {
+    title: "12. Heap / Priority Queue",
+    week: "Weeks 5–6",
+    problems: [
+      {id:215,name:"Kth Largest Element in an Array",slug:"kth-largest-element-in-an-array",diff:"M"},
+      {id:703,name:"Kth Largest Element in a Stream",slug:"kth-largest-element-in-a-stream",diff:"E"},
+      {id:621,name:"Task Scheduler",slug:"task-scheduler",diff:"M"},
+      {id:355,name:"Design Twitter",slug:"design-twitter",diff:"M"},
+      {id:295,name:"Find Median from Data Stream",slug:"find-median-from-data-stream",diff:"H"},
+      {id:502,name:"IPO",slug:"ipo",diff:"H"},
+      {id:373,name:"Find K Pairs with Smallest Sums",slug:"find-k-pairs-with-smallest-sums",diff:"M"},
+    ]
+  },
+  {
+    title: "13. Backtracking",
+    week: "Weeks 7–8",
+    problems: [
+      {id:17,name:"Letter Combinations of a Phone Number",slug:"letter-combinations-of-a-phone-number",diff:"M"},
+      {id:77,name:"Combinations",slug:"combinations",diff:"M"},
+      {id:78,name:"Subsets",slug:"subsets",diff:"M"},
+      {id:46,name:"Permutations",slug:"permutations",diff:"M"},
+      {id:39,name:"Combination Sum",slug:"combination-sum",diff:"M"},
+      {id:377,name:"Combination Sum IV",slug:"combination-sum-iv",diff:"M"},
+      {id:79,name:"Word Search",slug:"word-search",diff:"M"},
+      {id:131,name:"Palindrome Partitioning",slug:"palindrome-partitioning",diff:"M"},
+      {id:51,name:"N-Queens",slug:"n-queens",diff:"H"},
+      {id:52,name:"N-Queens II",slug:"n-queens-ii",diff:"H"},
+    ]
+  },
+  {
+    title: "14. Graphs",
+    week: "Weeks 7–8",
+    problems: [
+      {id:200,name:"Number of Islands",slug:"number-of-islands",diff:"M"},
+      {id:133,name:"Clone Graph",slug:"clone-graph",diff:"M"},
+      {id:695,name:"Max Area of Island",slug:"max-area-of-island",diff:"M"},
+      {id:417,name:"Pacific Atlantic Water Flow",slug:"pacific-atlantic-water-flow",diff:"M"},
+      {id:130,name:"Surrounded Regions",slug:"surrounded-regions",diff:"M"},
+      {id:994,name:"Rotting Oranges",slug:"rotting-oranges",diff:"M"},
+      {id:399,name:"Evaluate Division",slug:"evaluate-division",diff:"M"},
+      {id:207,name:"Course Schedule",slug:"course-schedule",diff:"M"},
+      {id:210,name:"Course Schedule II",slug:"course-schedule-ii",diff:"M"},
+      {id:261,name:"Graph Valid Tree",slug:"graph-valid-tree",diff:"M"},
+      {id:323,name:"Number of Connected Components in an Undirected Graph",slug:"number-of-connected-components-in-an-undirected-graph",diff:"M"},
+      {id:269,name:"Alien Dictionary",slug:"alien-dictionary",diff:"H"},
+      {id:909,name:"Snakes and Ladders",slug:"snakes-and-ladders",diff:"M"},
+      {id:433,name:"Minimum Genetic Mutation",slug:"minimum-genetic-mutation",diff:"M"},
+      {id:127,name:"Word Ladder",slug:"word-ladder",diff:"H"},
+      {id:126,name:"Word Ladder II",slug:"word-ladder-ii",diff:"H"},
+    ]
+  },
+  {
+    title: "15. One-Dimensional Dynamic Programming",
+    week: "Weeks 9–10",
+    problems: [
+      {id:70,name:"Climbing Stairs",slug:"climbing-stairs",diff:"E"},
+      {id:198,name:"House Robber",slug:"house-robber",diff:"M"},
+      {id:213,name:"House Robber II",slug:"house-robber-ii",diff:"M"},
+      {id:91,name:"Decode Ways",slug:"decode-ways",diff:"M"},
+      {id:322,name:"Coin Change",slug:"coin-change",diff:"M"},
+      {id:300,name:"Longest Increasing Subsequence",slug:"longest-increasing-subsequence",diff:"M"},
+      {id:516,name:"Longest Palindromic Subsequence",slug:"longest-palindromic-subsequence",diff:"M"},
+      {id:647,name:"Palindromic Substrings",slug:"palindromic-substrings",diff:"M"},
+      {id:139,name:"Word Break",slug:"word-break",diff:"M"},
+      {id:416,name:"Partition Equal Subset Sum",slug:"partition-equal-subset-sum",diff:"M"},
+    ]
+  },
+  {
+    title: "16. Two-Dimensional Dynamic Programming",
+    week: "Weeks 9–10",
+    problems: [
+      {id:62,name:"Unique Paths",slug:"unique-paths",diff:"M"},
+      {id:63,name:"Unique Paths II",slug:"unique-paths-ii",diff:"M"},
+      {id:64,name:"Minimum Path Sum",slug:"minimum-path-sum",diff:"M"},
+      {id:120,name:"Triangle",slug:"triangle",diff:"M"},
+      {id:1143,name:"Longest Common Subsequence",slug:"longest-common-subsequence",diff:"M"},
+      {id:5,name:"Longest Palindromic Substring",slug:"longest-palindromic-substring",diff:"M"},
+      {id:97,name:"Interleaving String",slug:"interleaving-string",diff:"M"},
+      {id:72,name:"Edit Distance",slug:"edit-distance",diff:"M"},
+      {id:221,name:"Maximal Square",slug:"maximal-square",diff:"M"},
+      {id:85,name:"Maximal Rectangle",slug:"maximal-rectangle",diff:"H"},
+      {id:312,name:"Burst Balloons",slug:"burst-balloons",diff:"H"},
+      {id:10,name:"Regular Expression Matching",slug:"regular-expression-matching",diff:"H"},
+      {id:44,name:"Wildcard Matching",slug:"wildcard-matching",diff:"H"},
+      {id:123,name:"Best Time to Buy and Sell Stock III",slug:"best-time-to-buy-and-sell-stock-iii",diff:"H"},
+      {id:188,name:"Best Time to Buy and Sell Stock IV",slug:"best-time-to-buy-and-sell-stock-iv",diff:"H"},
+    ]
+  },
+  {
+    title: "17. Math and Geometry",
+    week: "Week 11",
+    problems: [
+      {id:9,name:"Palindrome Number",slug:"palindrome-number",diff:"E"},
+      {id:66,name:"Plus One",slug:"plus-one",diff:"E"},
+      {id:69,name:"Sqrt(x)",slug:"sqrtx",diff:"E"},
+      {id:50,name:"Pow(x, n)",slug:"powx-n",diff:"M"},
+      {id:172,name:"Factorial Trailing Zeroes",slug:"factorial-trailing-zeroes",diff:"M"},
+      {id:43,name:"Multiply Strings",slug:"multiply-strings",diff:"M"},
+      {id:149,name:"Max Points on a Line",slug:"max-points-on-a-line",diff:"H"},
+    ]
+  },
+  {
+    title: "18. Bit Manipulation",
+    week: "Week 11",
+    problems: [
+      {id:136,name:"Single Number",slug:"single-number",diff:"E"},
+      {id:137,name:"Single Number II",slug:"single-number-ii",diff:"M"},
+      {id:191,name:"Number of 1 Bits",slug:"number-of-1-bits",diff:"E"},
+      {id:338,name:"Counting Bits",slug:"counting-bits",diff:"E"},
+      {id:190,name:"Reverse Bits",slug:"reverse-bits",diff:"E"},
+      {id:268,name:"Missing Number",slug:"missing-number",diff:"E"},
+      {id:371,name:"Sum of Two Integers",slug:"sum-of-two-integers",diff:"M"},
+      {id:67,name:"Add Binary",slug:"add-binary",diff:"E"},
+      {id:201,name:"Bitwise AND of Numbers Range",slug:"bitwise-and-of-numbers-range",diff:"M"},
+    ]
+  },
+  {
+    title: "19. Advanced / Final Review",
+    week: "Week 12",
+    problems: [
+      {id:41,name:"First Missing Positive",slug:"first-missing-positive",diff:"H"},
+      {id:25,name:"Reverse Nodes in k-Group",slug:"reverse-nodes-in-k-group",diff:"H",revisit:true},
+      {id:42,name:"Trapping Rain Water",slug:"trapping-rain-water",diff:"H",revisit:true},
+      {id:84,name:"Largest Rectangle in Histogram",slug:"largest-rectangle-in-histogram",diff:"H",revisit:true},
+      {id:4,name:"Median of Two Sorted Arrays",slug:"median-of-two-sorted-arrays",diff:"H",revisit:true},
+      {id:269,name:"Alien Dictionary",slug:"alien-dictionary",diff:"H",revisit:true},
+      {id:297,name:"Serialize and Deserialize Binary Tree",slug:"serialize-and-deserialize-binary-tree",diff:"H",revisit:true},
+    ]
+  },
+];
 
-          <div class="hero__socials">
-            <a href="https://github.com/tarunattuluri19" target="_blank" rel="noreferrer" aria-label="GitHub" class="social-link">
-              <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49l-.01-1.7c-2.78.62-3.37-1.21-3.37-1.21-.46-1.18-1.11-1.49-1.11-1.49-.9-.64.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.36 9.36 0 015 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.6.69.49A10.02 10.02 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg>
-            </a>
-            <a href="https://tarunattuluri.netlify.app/" target="_blank" rel="noreferrer" aria-label="Blog / Portfolio" class="social-link">
-              <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zM8 17H6v-2h2v2zm0-4H6v-2h2v2zm0-4H6V7h2v2zm10 8h-8v-2h8v2zm0-4h-8v-2h8v2zm0-4h-8V7h8v2z"/></svg>
-            </a>
-            <a href="mailto:tarun@example.com" aria-label="Email" class="social-link">
-              <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-            </a>
-          </div>
-        </div>
+const STORAGE_KEY = "lc_done_v1";
 
-        <div class="hero__visual">
-          <div class="code-card">
-            <div class="code-card__bar">
-              <span class="dot dot--red"></span>
-              <span class="dot dot--yellow"></span>
-              <span class="dot dot--green"></span>
-              <span class="code-card__file">Developer.java</span>
-            </div>
-<pre class="code-card__body"><code><span class="c-key">public class</span> <span class="c-cls">Developer</span> {
-  <span class="c-key">String</span> name = <span class="c-str">"Tarun A"</span>;
-  <span class="c-key">String</span> role = <span class="c-str">"AI Full Stack"</span>;
-  <span class="c-key">String</span> company = <span class="c-str">"Cognizant"</span>;
+function loadDone() {
+  try { return new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]")); } catch { return new Set(); }
+}
+function saveDone(set) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify([...set])); } catch {}
+}
 
-  <span class="c-key">String[]</span> stack = {
-    <span class="c-str">"Java"</span>, <span class="c-str">"Spring"</span>, <span class="c-str">"React"</span>,
-    <span class="c-str">"Node.js"</span>, <span class="c-str">"Express"</span>
-  };
+const done = loadDone();
 
-  <span class="c-key">boolean</span> learning = <span class="c-num">true</span>; <span class="c-cmt">// AI 🚀</span>
-}</code></pre>
-          </div>
-        </div>
-      </div>
-    </section>
+function makeKey(sec, prob) { return `${sec}-${prob}`; }
 
-    <!-- ============ ABOUT ============ -->
-    <section class="section" id="about">
-      <div class="container">
-        <p class="section__eyebrow">Get to know me</p>
-        <h2 class="section__title">About&nbsp;Me</h2>
+function render(filter = "") {
+  const container = document.getElementById("sectionsContainer");
+  container.innerHTML = "";
+  const fl = filter.toLowerCase();
 
-        <div class="about__grid">
-          <div class="about__text">
-            <p>
-              I'm a passionate <strong>AI Full Stack Java Developer</strong> who loves turning
-              ideas into reliable, scalable products. My day‑to‑day blends clean backend
-              architecture with delightful, responsive user interfaces.
-            </p>
-            <ul class="about__list">
-              <li>🔭 I'm currently working at <strong>Cognizant</strong></li>
-              <li>🌱 I'm currently learning <strong>AI‑led development</strong></li>
-              <li>📝 I regularly write articles on
-                <a href="https://tarunattuluri.netlify.app/" target="_blank" rel="noreferrer">tarunattuluri.netlify.app</a>
-              </li>
-              <li>💬 Ask me about <strong>Java, Spring, React &amp; full‑stack design</strong></li>
-            </ul>
-            <a href="https://tarunattuluri.netlify.app/" target="_blank" rel="noreferrer" class="btn btn--primary">Read My Blog</a>
-          </div>
+  let totalCount = 0, doneCount = 0, easyCount = 0, medCount = 0, hardCount = 0;
 
-          <div class="about__cards">
-            <div class="stat-card">
-              <span class="stat-card__num">Full&nbsp;Stack</span>
-              <span class="stat-card__label">End‑to‑end development</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-card__num">AI&nbsp;+&nbsp;Web</span>
-              <span class="stat-card__label">Smart applications</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-card__num">Java&nbsp;☕</span>
-              <span class="stat-card__label">Spring ecosystem</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-card__num">Writer&nbsp;✍️</span>
-              <span class="stat-card__label">Tech articles &amp; notes</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+  SECTIONS.forEach((sec, si) => {
+    const filtered = fl ? sec.problems.filter(p => p.name.toLowerCase().includes(fl) || String(p.id).includes(fl)) : sec.problems;
+    if (!filtered.length) return;
 
-    <!-- ============ SKILLS ============ -->
-    <section class="section section--alt" id="skills">
-      <div class="container">
-        <p class="section__eyebrow">My toolbox</p>
-        <h2 class="section__title">Languages &amp; Tools</h2>
+    const section = document.createElement("section");
+    const badge = sec.week ? `<span class="week-badge">${sec.week}</span>` : "";
+    section.innerHTML = `${badge}<h2>${sec.title}<span class="section-count">${filtered.length} problems</span></h2>`;
+    const ul = document.createElement("ul");
 
-        <div class="skills__grid">
-          <a class="skill" href="https://www.java.com" target="_blank" rel="noreferrer">
-            <img src="https://skillicons.dev/icons?i=java" alt="Java" loading="lazy" />
-            <span>Java</span>
-          </a>
-          <a class="skill" href="https://spring.io" target="_blank" rel="noreferrer">
-            <img src="https://skillicons.dev/icons?i=spring" alt="Spring" loading="lazy" />
-            <span>Spring</span>
-          </a>
-          <a class="skill" href="https://react.dev" target="_blank" rel="noreferrer">
-            <img src="https://skillicons.dev/icons?i=react" alt="React" loading="lazy" />
-            <span>React</span>
-          </a>
-          <a class="skill" href="https://nodejs.org" target="_blank" rel="noreferrer">
-            <img src="https://skillicons.dev/icons?i=nodejs" alt="Node.js" loading="lazy" />
-            <span>Node.js</span>
-          </a>
-          <a class="skill" href="https://expressjs.com" target="_blank" rel="noreferrer">
-            <img src="https://skillicons.dev/icons?i=express" alt="Express" loading="lazy" />
-            <span>Express</span>
-          </a>
-          <a class="skill" href="https://developer.mozilla.org/docs/Web/JavaScript" target="_blank" rel="noreferrer">
-            <img src="https://skillicons.dev/icons?i=js" alt="JavaScript" loading="lazy" />
-            <span>JavaScript</span>
-          </a>
-          <a class="skill" href="https://developer.mozilla.org/docs/Web/HTML" target="_blank" rel="noreferrer">
-            <img src="https://skillicons.dev/icons?i=html" alt="HTML5" loading="lazy" />
-            <span>HTML5</span>
-          </a>
-          <a class="skill" href="https://developer.mozilla.org/docs/Web/CSS" target="_blank" rel="noreferrer">
-            <img src="https://skillicons.dev/icons?i=css" alt="CSS3" loading="lazy" />
-            <span>CSS3</span>
-          </a>
-        </div>
-      </div>
-    </section>
+    filtered.forEach(p => {
+      const key = makeKey(si, p.id);
+      const isDone = done.has(key);
+      totalCount++;
+      if (isDone) doneCount++;
+      if (p.diff === "E") easyCount++;
+      else if (p.diff === "M") medCount++;
+      else hardCount++;
 
-    <!-- ============ PROJECTS ============ -->
-    <section class="section" id="projects">
-      <div class="container">
-        <p class="section__eyebrow">Things I've built</p>
-        <h2 class="section__title">Featured Projects</h2>
-        <p class="section__lead">
-          A few highlights — swap these out with your real repositories any time.
-        </p>
-
-        <div class="projects__grid">
-          <article class="project-card">
-            <div class="project-card__top">
-              <span class="project-card__icon">🤖</span>
-              <div class="project-card__links">
-                <a href="https://github.com/tarunattuluri19" target="_blank" rel="noreferrer" aria-label="Source code">
-                  <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49l-.01-1.7c-2.78.62-3.37-1.21-3.37-1.21-.46-1.18-1.11-1.49-1.11-1.49-.9-.64.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.36 9.36 0 015 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.6.69.49A10.02 10.02 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg>
-                </a>
-              </div>
-            </div>
-            <h3 class="project-card__title">AI Assistant Platform</h3>
-            <p class="project-card__desc">
-              A full‑stack app pairing a Spring Boot API with a React UI to deliver
-              AI‑powered chat and content generation.
-            </p>
-            <ul class="project-card__tags">
-              <li>Java</li><li>Spring</li><li>React</li>
-            </ul>
-          </article>
-
-          <article class="project-card">
-            <div class="project-card__top">
-              <span class="project-card__icon">🛒</span>
-              <div class="project-card__links">
-                <a href="https://github.com/tarunattuluri19" target="_blank" rel="noreferrer" aria-label="Source code">
-                  <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49l-.01-1.7c-2.78.62-3.37-1.21-3.37-1.21-.46-1.18-1.11-1.49-1.11-1.49-.9-.64.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.36 9.36 0 015 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.6.69.49A10.02 10.02 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg>
-                </a>
-              </div>
-            </div>
-            <h3 class="project-card__title">Commerce API</h3>
-            <p class="project-card__desc">
-              A robust REST backend with Node.js &amp; Express handling products, carts
-              and secure checkout flows.
-            </p>
-            <ul class="project-card__tags">
-              <li>Node.js</li><li>Express</li><li>JavaScript</li>
-            </ul>
-          </article>
-
-          <article class="project-card">
-            <div class="project-card__top">
-              <span class="project-card__icon">📊</span>
-              <div class="project-card__links">
-                <a href="https://github.com/tarunattuluri19" target="_blank" rel="noreferrer" aria-label="Source code">
-                  <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49l-.01-1.7c-2.78.62-3.37-1.21-3.37-1.21-.46-1.18-1.11-1.49-1.11-1.49-.9-.64.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.36 9.36 0 015 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.6.69.49A10.02 10.02 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg>
-                </a>
-              </div>
-            </div>
-            <h3 class="project-card__title">Dev Blog</h3>
-            <p class="project-card__desc">
-              My personal space where I write articles and share what I learn about
-              full‑stack and AI development.
-            </p>
-            <ul class="project-card__tags">
-              <li>HTML</li><li>CSS</li><li>JavaScript</li>
-            </ul>
-          </article>
-        </div>
-
-        <div class="projects__more">
-          <a href="https://github.com/tarunattuluri19?tab=repositories" target="_blank" rel="noreferrer" class="btn btn--ghost">
-            See all on GitHub
-            <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h14m-6-6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ CONTACT ============ -->
-    <section class="section section--alt" id="contact">
-      <div class="container">
-        <p class="section__eyebrow">Let's connect</p>
-        <h2 class="section__title">Get In Touch</h2>
-        <p class="section__lead">
-          Got an idea, an opportunity, or just want to talk tech? My inbox is always open.
-        </p>
-
-        <div class="contact__actions">
-          <a href="mailto:tarun@example.com" class="btn btn--primary">
-            <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-            Say Hello
-          </a>
-          <a href="https://github.com/tarunattuluri19" target="_blank" rel="noreferrer" class="btn btn--ghost">Follow on GitHub</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ============ FOOTER ============ -->
-  <footer class="footer">
-    <div class="container footer__inner">
-      <a href="#home" class="nav__logo"><span class="logo-mark">&lt;/&gt;</span> Tarun&nbsp;A</a>
-      <p class="footer__text">Designed &amp; built with ☕ &amp; ❤️ by Tarun A.</p>
-      <p class="footer__copy">© <span id="year"></span> Tarun A. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <a href="#home" class="to-top" id="to-top" aria-label="Back to top">
-    <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 19V5m-7 7l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </a>
-
-  <script>
-  /* ============================================================
-     Tarun A — Portfolio  |  scripts
-     ============================================================ */
-  (() => {
-    "use strict";
-
-    /* ---------- 1. Theme toggle (with saved preference) ---------- */
-    const root = document.documentElement;
-    const themeToggle = document.getElementById("theme-toggle");
-    const savedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-    root.setAttribute("data-theme", savedTheme || (prefersDark ? "dark" : "light"));
-
-    themeToggle?.addEventListener("click", () => {
-      const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      root.setAttribute("data-theme", next);
-      localStorage.setItem("theme", next);
+      const li = document.createElement("li");
+      if (isDone) li.classList.add("done");
+      const revisitBadge = p.revisit ? `<span class="revisit">↩ revisit</span>` : "";
+      li.innerHTML = `
+        <input type="checkbox" ${isDone ? "checked" : ""} data-key="${key}" />
+        <span class="num">#${p.id}</span>
+        <a href="https://leetcode.com/problems/${p.slug}/" target="_blank" rel="noopener">${p.name}</a>
+        ${revisitBadge}
+        <span class="diff ${p.diff}">${p.diff === "E" ? "Easy" : p.diff === "M" ? "Med" : "Hard"}</span>
+      `;
+      li.querySelector("input").addEventListener("change", e => {
+        if (e.target.checked) done.add(key); else done.delete(key);
+        saveDone(done);
+        li.classList.toggle("done", e.target.checked);
+        updateStats();
+      });
+      ul.appendChild(li);
     });
 
-    /* ---------- 2. Mobile menu ---------- */
-    const navToggle = document.getElementById("nav-toggle");
-    const navMenu = document.getElementById("nav-menu");
+    section.appendChild(ul);
+    container.appendChild(section);
+  });
 
-    navToggle?.addEventListener("click", () => {
-      navMenu.classList.toggle("open");
-      navToggle.classList.toggle("open");
+  document.getElementById("totalCount").textContent = doneCount;
+  document.getElementById("s-easy").textContent = easyCount;
+  document.getElementById("s-medium").textContent = medCount;
+  document.getElementById("s-hard").textContent = hardCount;
+  document.getElementById("s-total").textContent = totalCount;
+  document.getElementById("progressBar").style.width = totalCount ? `${(doneCount/totalCount)*100}%` : "0%";
+}
+
+function updateStats() {
+  let totalCount = 0, doneCount = 0;
+  SECTIONS.forEach((sec, si) => {
+    sec.problems.forEach(p => {
+      totalCount++;
+      if (done.has(makeKey(si, p.id))) doneCount++;
     });
+  });
+  document.getElementById("doneCount").textContent = doneCount;
+  document.getElementById("progressBar").style.width = `${(doneCount/totalCount)*100}%`;
+}
 
-    // Close menu when a link is clicked
-    navMenu?.querySelectorAll(".nav__link").forEach((link) =>
-      link.addEventListener("click", () => {
-        navMenu.classList.remove("open");
-        navToggle.classList.remove("open");
-      })
-    );
-
-    /* ---------- 3. Navbar shadow + back-to-top on scroll ---------- */
-    const navbar = document.getElementById("navbar");
-    const toTop = document.getElementById("to-top");
-
-    const onScroll = () => {
-      const y = window.scrollY;
-      navbar?.classList.toggle("scrolled", y > 20);
-      toTop?.classList.toggle("show", y > 500);
-      spyActiveSection();
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    /* ---------- 4. Active section highlighting (scroll spy) ---------- */
-    const sections = [...document.querySelectorAll("section[id]")];
-    const navLinks = [...document.querySelectorAll(".nav__link")];
-
-    function spyActiveSection() {
-      const pos = window.scrollY + 120;
-      let currentId = sections[0]?.id;
-
-      for (const sec of sections) {
-        if (pos >= sec.offsetTop) currentId = sec.id;
-      }
-      navLinks.forEach((link) =>
-        link.classList.toggle("active", link.getAttribute("href") === `#${currentId}`)
-      );
-    }
-
-    /* ---------- 5. Scroll reveal animations ---------- */
-    const revealTargets = document.querySelectorAll(
-      ".section__eyebrow, .section__title, .section__lead, .hero__content > *, " +
-      ".code-card, .about__list li, .stat-card, .skill, .project-card, .contact__actions"
-    );
-    revealTargets.forEach((el, i) => {
-      el.classList.add("reveal");
-      el.style.transitionDelay = `${(i % 6) * 70}ms`;
-    });
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
-    revealTargets.forEach((el) => observer.observe(el));
-
-    /* ---------- 6. Typed text effect ---------- */
-    const typedEl = document.getElementById("typed");
-    const phrases = [
-      "AI Full Stack Developer",
-      "Java & Spring Engineer",
-      "React Front\u2011end Dev",
-      "Node.js Backend Dev",
-      "Lifelong Learner",
-    ];
-    let pIndex = 0,
-      cIndex = 0,
-      deleting = false;
-
-    function typeLoop() {
-      if (!typedEl) return;
-      const current = phrases[pIndex];
-      typedEl.textContent = current.slice(0, cIndex);
-
-      if (!deleting && cIndex < current.length) {
-        cIndex++;
-      } else if (deleting && cIndex > 0) {
-        cIndex--;
-      } else if (!deleting && cIndex === current.length) {
-        deleting = true;
-        return setTimeout(typeLoop, 1600);
-      } else {
-        deleting = false;
-        pIndex = (pIndex + 1) % phrases.length;
-      }
-      setTimeout(typeLoop, deleting ? 45 : 90);
-    }
-    typeLoop();
-
-    /* ---------- 7. Dynamic footer year ---------- */
-    const yearEl = document.getElementById("year");
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-    // Run once on load
-    onScroll();
-  })();
-  </script>
+document.getElementById("searchBox").addEventListener("input", e => render(e.target.value));
+render();
+</script>
 </body>
 </html>
